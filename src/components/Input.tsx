@@ -1,38 +1,35 @@
 import { useRef } from "react";
 
 interface InputPropsComponentType {
-    setPaths : React.Dispatch<React.SetStateAction<string>>;
-  }
+  setPaths: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const Input = ({setPaths} : InputPropsComponentType) => {
+const Input = ({ setPaths }: InputPropsComponentType) => {
+  let inputRef = useRef<HTMLTextAreaElement>(null);
 
-  let inputRef = useRef<HTMLInputElement>(null);
-
-  const submitHandler = (e: { preventDefault: () => void; }) => {
+  const buttonHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const currentPaths = inputRef.current!.value;
     setPaths(currentPaths);
-    inputRef.current!.value = '';;
+    inputRef.current!.value = "";
   };
 
   return (
-    <form className="form">
-      <h3>
+    <form action="javascript:void(0)" className="form">
+      <label htmlFor="story">
         Please, enter a graph in a textarea by typing some paths (a word is a
         node, a dash an edge and a new line or a comma a separation between
         paths).
-      </h3>
-      <input
+      </label>
+      <textarea
         className="form__input"
-        type="text"
         placeholder="a-b-c"
         ref={inputRef}
+        id="story"
+        rows={5}
+        cols={33}
       />
-      <button
-        className="form__button"
-        type="submit"
-        onClick={submitHandler}
-      >
+      <button className="form__button" type="button" onClick={buttonHandler}>
         Save
       </button>
     </form>
