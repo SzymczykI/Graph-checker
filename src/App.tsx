@@ -7,57 +7,134 @@ const App = () => {
   const [paths, setPaths] = useState("");
   // const [adj, setAdj] = useState([])
   let nodes: { id: string; label: string }[] = [];
-
-  console.log(paths);
+  console.log("_____________")
   const pathsArray = paths
     .replaceAll(/\n/g, ",")
     .replaceAll(/\s/g, "")
     .split(/[,]|\n/);
 
+  // const createGraph = (source: number, dest: number) => {
+  //   let adjList: number[][] = [];
+  //   const addVertex = (v: number) => {
+  //     if (!adjList[v]) {
+  //       adjList[v] = [];
+  //     }
+  //   };
+  //   if (!adjList[source]) {
+  //     addVertex(source);
+  //   }
+  // };
+  let edges: number;
+  let adjList: any[] = [];
+  let vertices: number;
 
-	let V = 4;
+  const Graph = (v: number) => {
+    vertices = v;
+    for (let i = 0; i < vertices; ++i) {
+      adjList[i] = [];
+    }
+  };
 
-	const colorGraph = (G: number[][], color: any[], pos: number, c: number) => {
-		if (color[pos] != -1 && color[pos] != c) return false;
+  const newEdge = (v: number, w: number) => {
+    adjList[v].push(w);
+    adjList[w].push(v);
+    edges++;
+  };
 
-		// color this pos as c and
-		// all its neighbours as 1-c
-		color[pos] = c;
-		var ans = true;
-		for (var i = 0; i < V; i++) {
-		if (G[pos][i] === 1) {
-			if (color[i] === -1) colorGraph(G, color, i, 1 - c);
+  const printGraph = () => {
+    for (let i = 0; i < vertices; ++i) {
+      let txt = "";
+      txt += i + ": ";
+      for (let j = 0; j < vertices; ++j) {
+        if (adjList[i][j] !== undefined) txt += adjList[i][j] + " ";
+      }
+      console.log(txt);
+    }
+  };
 
-			if (color[i] !== -1 && color[i] !== 1 - c) return false;
-		}
-		if (!ans) return false;
-		}
-		return true;
-	}
+  const mygraph = () => {
+    for (let i = 0; i < vertices; ++i) {
+      for (let j = 0; j < vertices; ++j) {
+      return adjList[i][j]
+  }}}
+  console.log("mygraph", mygraph())
 
-	const isBipartite = (G: number[][]) => {
-		let color = new Array(V).fill(0);
-		for (let i = 0; i < V; i++) color[i] = -1;
+  Graph(5);
+  newEdge(0, 1);
+  newEdge(0, 2);
+  newEdge(2, 4);
+  newEdge(2, 3);
+  newEdge(3, 4);
+  console.log("print")
+  printGraph();
+  console.log("adj list", adjList)
 
-		// start is vertex 0;
-		var pos = 0;
+  const graph = [
+    [1, 3],
+    [0, 2],
+    [1, 3],
+    [0, 2],
+  ];
 
-		// two colors 1 and 0
-		return colorGraph(G, color, pos, 1);
-	}
+  const isBipartite = (graph: number[][]) => {
+    let result = true;
+    const n = graph.length;
+    let color = Array(n).fill(true);
+    let visited = Array(n);
+    const traverse = (graph: number[][], v: number) => {
+      if (!result) return;
+      visited[v] = true;
+      for (let w of graph[v]) {
+        if (!visited[w]) {
+          color[w] = !color[v];
+          traverse(graph, w);
+        } else {
+          if (color[w] === color[v]) {
+            result = false;
+          }
+        }
+      }
+    };
+    for (let v = 0; v < n; v++) {
+      if (!visited[v]) {
+        traverse(graph, v);
+      }
+    }
+    return result;
+  };
 
-	// Driver Code
-	let G = [
-		[0, 1, 0, 1],
-		[1, 0, 1, 0],
-		[0, 1, 0, 1],
-		[1, 0, 1, 0],
-	];
+  console.log("first func", isBipartite(adjList));
 
-	if (isBipartite(G)) console.log("Yes");
-	else console.log("No");
-	
+  const isBipartite2 = (graph: number[][]) => {
+    const n = graph.length;
+    console.log("n = ", n);
+    const color = Array(n).fill(0);
+    console.log("color = ", color);
 
+    for (let i = 0; i < n; i++) {
+      console.log("color i ", color[i]);
+      if (color[i]) continue;
+      const queue = [i];
+      color[i] = 1;
+
+      while (queue.length) {
+        const curr = queue.shift();
+        console.log(curr);
+        if (curr !== undefined) {
+          for (let next of graph[curr]) {
+            if (color[next] === color[curr]) return false;
+            if (!color[next]) {
+              color[next] = color[curr] === 1 ? 2 : 1;
+              queue.push(next);
+            }
+          }
+        }
+      }
+    }
+    return true;
+  };
+
+  console.log("new func", isBipartite2(adjList));
   // console.log(nodes);
   // pathsArray.map((path) => {
   //   const splitedPath = path.split(/[-]/);
@@ -95,7 +172,7 @@ const App = () => {
   return (
     <div className="App">
       <Imput setPaths={setPaths} />
-      <Graph />
+      {/* <Graph /> */}
     </div>
   );
 };

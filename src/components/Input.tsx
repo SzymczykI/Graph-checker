@@ -15,7 +15,7 @@ const Input = ({ setPaths }: InputPropsComponentType) => {
   };
 
   return (
-    <form action="javascript:void(0)" className="form">
+    <form className="form">
       <label htmlFor="story">
         Please, enter a graph in a textarea by typing some paths (a word is a
         node, a dash an edge and a new line or a comma a separation between
