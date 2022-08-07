@@ -23,7 +23,7 @@ const Input = ({ setPaths }: InputPropsComponentType) => {
       </label>
       <textarea
         className="form__input"
-        placeholder="a-b-c"
+        placeholder="a-b"
         ref={inputRef}
         id="story"
         rows={5}

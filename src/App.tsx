@@ -5,25 +5,32 @@ import Imput from "./components/Input";
 
 const App = () => {
   const [paths, setPaths] = useState("");
-  // const [adj, setAdj] = useState([])
-  let nodes: { id: string; label: string }[] = [];
-  console.log("_____________")
+
+  console.log("_____________");
+  console.log(paths);
   const pathsArray = paths
     .replaceAll(/\n/g, ",")
     .replaceAll(/\s/g, "")
     .split(/[,]|\n/);
 
-  // const createGraph = (source: number, dest: number) => {
-  //   let adjList: number[][] = [];
-  //   const addVertex = (v: number) => {
-  //     if (!adjList[v]) {
-  //       adjList[v] = [];
-  //     }
-  //   };
-  //   if (!adjList[source]) {
-  //     addVertex(source);
-  //   }
-  // };
+  console.log("pathsArr", pathsArray);
+  let allVertices: number[] = [];
+
+  const recreatePaths = (pathsArr: string[]) => {
+    let newArr: Array<number>[] = [];
+    pathsArr.map((n) => {
+      const a = n.split(/[-]/);
+      const b = a.map((c) => c.charCodeAt(0) - 97);
+      console.log(a.length - 1);
+      let f = [];
+      for (let i = 0; i < a.length - 1; i++) {
+        newArr.push([b[i], b[i + 1]]);
+      }
+    });
+    return newArr;
+  };
+  console.log("######", recreatePaths(pathsArray));
+
   let edges: number;
   let adjList: any[] = [];
   let vertices: number;
@@ -55,19 +62,28 @@ const App = () => {
   const mygraph = () => {
     for (let i = 0; i < vertices; ++i) {
       for (let j = 0; j < vertices; ++j) {
-      return adjList[i][j]
-  }}}
-  console.log("mygraph", mygraph())
+        return adjList[i][j];
+      }
+    }
+  };
+  // console.log("mygraph", mygraph());
+  const createAdjFromInput = () => {
+    try {
+      const p = recreatePaths(pathsArray);
+      Graph(4);
+      p.map((e) => {
+        if (e !== undefined) newEdge(e[0], e[1]);
+      });
+    } catch (error) {
+      console.error("error");
+    }
+  };
 
-  Graph(5);
-  newEdge(0, 1);
-  newEdge(0, 2);
-  newEdge(2, 4);
-  newEdge(2, 3);
-  newEdge(3, 4);
-  console.log("print")
+  createAdjFromInput();
+
+  console.log("print");
   printGraph();
-  console.log("adj list", adjList)
+  console.log("adj list", adjList);
 
   const graph = [
     [1, 3],
