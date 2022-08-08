@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import "./Input.css";
 
 interface InputPropsComponentType {
   setPaths: React.Dispatch<React.SetStateAction<string>>;
@@ -15,24 +16,26 @@ const Input = ({ setPaths }: InputPropsComponentType) => {
   };
 
   return (
-    <form className="form">
-      <label htmlFor="story">
-        Please, enter a graph in a textarea by typing some paths (a word is a
-        node, a dash an edge and a new line or a comma a separation between
-        paths).
-      </label>
-      <textarea
-        className="form__input"
-        placeholder="a-b"
-        ref={inputRef}
-        id="story"
-        rows={5}
-        cols={33}
-      />
-      <button className="form__button" type="button" onClick={buttonHandler}>
-        Save
-      </button>
-    </form>
+    <div className="input__container">
+      <form className="input__form">
+        <label htmlFor="story" className="input__form-label">
+          Please, enter a graph in a textarea by typing some paths (a letter is
+          a node, a dash an edge and a new line or a comma a separation between
+          paths).
+        </label>
+        <textarea
+          className="input__form-textarea"
+          placeholder="a-b-c or a-b, b-c"
+          ref={inputRef}
+          id="story"
+          rows={5}
+          cols={33}
+        />
+        <button className="input__form-btn" type="button" onClick={buttonHandler}>
+          Save
+        </button>
+      </form>
+    </div>
   );
 };
 

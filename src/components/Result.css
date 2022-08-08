@@ -1,0 +1,25 @@
+.result__container {
+  width: 400px;
+  height: max-content;
+  margin-top: 2em;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid rgb(202, 201, 201);
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+}
+
+.result__container 
+.result-true {
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: #97e3b0;
+}
+
+.result__container 
+.result-false {
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: #d96d5f;
+}
