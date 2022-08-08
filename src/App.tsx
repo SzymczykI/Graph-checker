@@ -34,7 +34,7 @@ const App = () => {
           setResultOpen(true);
         }
       } catch (error) {
-        setResult(false);
+        setResultOpen(false);
       }
     };
     checkGraph();
