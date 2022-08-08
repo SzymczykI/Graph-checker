@@ -15,7 +15,7 @@
   max-width: 450px;
   font-size: 20px;
   text-align: center;
-  margin-bottom: 1em
+  margin-bottom: 1em;
 }
 
 .input__form-textarea {
@@ -34,9 +34,21 @@
   padding: 6px 14px;
   border-radius: 6px;
   border: none;
-  background: #6E6D70;
-  box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
-  color: #DFDEDF;
+  background: #6e6d70;
+  box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1),
+    inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5),
+    0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+  color: #dfdedf;
   margin-top: 1rem;
 }
 
+@media screen and (max-width: 600px) {
+  .input__form-label {
+    max-width: 250px;
+    font-size: 15px;
+  }
+  .input__form-textarea {
+    width: 250px;
+    font-size: 14px;
+  }
+}

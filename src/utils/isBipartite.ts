@@ -6,12 +6,12 @@ export const isBipartite = (graph: Array<number>[]) => {
   const traverse = (graph: number[][], v: number) => {
     if (!result) return;
     visited[v] = true;
-    for (let w of graph[v]) {
-      if (!visited[w]) {
-        color[w] = !color[v];
-        traverse(graph, w);
+    for (let i of graph[v]) {
+      if (!visited[i]) {
+        color[i] = !color[v];
+        traverse(graph, i);
       } else {
-        if (color[w] === color[v]) {
+        if (color[i] === color[v]) {
           result = false;
         }
       }
@@ -23,29 +23,4 @@ export const isBipartite = (graph: Array<number>[]) => {
     }
   }
   return result;
-};
-
-export const isBipartite2 = (graph: Array<number>[]) => {
-  const n = graph.length;
-  const color = Array(n).fill(0);
-
-  for (let i = 0; i < n; i++) {
-    if (color[i]) continue;
-    const queue = [i];
-    color[i] = 1;
-
-    while (queue.length) {
-      const curr = queue.shift();
-      if (curr !== undefined) {
-        for (let next of graph[curr]) {
-          if (color[next] === color[curr]) return false;
-          if (!color[next]) {
-            color[next] = color[curr] === 1 ? 2 : 1;
-            queue.push(next);
-          }
-        }
-      }
-    }
-  }
-  return true;
 };

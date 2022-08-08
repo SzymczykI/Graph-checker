@@ -19,20 +19,22 @@ const App = () => {
         .replaceAll(/\s/g, "")
         .split(/[,]|\n/);
 
-      console.log(pathsArray);
-      const adjList = createAdjListFromInput(
-        recreatePaths,
-        howManyNodes,
-        pathsArray
-      );
-      console.log(adjList);
-      if (adjList?.length === 0 || paths.length === 0) {
-        setResultOpen(false);
-        return;
-      }
-      if (adjList !== undefined) {
-        setResult(isBipartite(adjList));
-        setResultOpen(true);
+      try {
+        const adjList = createAdjListFromInput(
+          recreatePaths,
+          howManyNodes,
+          pathsArray
+        );
+        if (adjList?.length === 0 || paths.length === 0) {
+          setResultOpen(false);
+          return;
+        }
+        if (adjList !== undefined) {
+          setResult(isBipartite(adjList));
+          setResultOpen(true);
+        }
+      } catch (error) {
+        setResult(false);
       }
     };
     checkGraph();
@@ -42,9 +44,7 @@ const App = () => {
     <div className="App">
       <Header />
       <Imput setPaths={setPaths} />
-      {resultOpen && (
-        <Result paths={paths} result={result} />
-      )}
+      {resultOpen && <Result paths={paths} result={result} />}
     </div>
   );
 };

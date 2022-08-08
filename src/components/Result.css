@@ -23,3 +23,11 @@
     border-radius: 6px;
     background-color: #d96d5f;
 }
+
+@media screen and (max-width: 600px) {
+    .result__container  {
+      max-width: 250px;
+      font-size: 14px;
+    }
+  }
+  
