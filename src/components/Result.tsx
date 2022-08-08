@@ -3,10 +3,9 @@ import './Result.css'
 interface ResultPropsComponentType {
   paths: string;
   result: boolean;
-  setResultOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Result = ({ paths, result, setResultOpen }: ResultPropsComponentType) => {
+const Result = ({ paths, result }: ResultPropsComponentType) => {
   return (
     <div className="result__container">
       <h2> Result:</h2>

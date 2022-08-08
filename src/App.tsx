@@ -43,7 +43,7 @@ const App = () => {
       <Header />
       <Imput setPaths={setPaths} />
       {resultOpen && (
-        <Result paths={paths} result={result} setResultOpen={setResultOpen} />
+        <Result paths={paths} result={result} />
       )}
     </div>
   );
