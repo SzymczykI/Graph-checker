@@ -1,6 +1,6 @@
 export const recreatePaths = (pathsArr: string[]) => {
   let newArr: Array<number>[] = [];
-  pathsArr.map((n) => {
+  pathsArr.forEach((n) => {
     const a = n.split(/[-]/);
     const b = a.map((c) => c.charCodeAt(0) - 97);
     for (let i = 0; i < a.length - 1; i++) {
