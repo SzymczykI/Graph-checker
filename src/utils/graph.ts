@@ -3,7 +3,7 @@ export const createAdjListFromInput = (
   howManyNodes: (arg: string[]) => number,
   arr: string[]
 ) => {
-  let adjList: Array<number>[] = [];
+  let adjList: number[][] = [];
   let vertices: number;
 
   const Graph = (v: number) => {
@@ -23,9 +23,8 @@ export const createAdjListFromInput = (
   try {
     Graph(nodes);
     arrayWithPaths.forEach((e) => {
-      if (e !== undefined) newEdge(e[0], e[1]);
+      newEdge(e[0], e[1]);
     });
-
     return adjList;
   } catch (error) {
     console.error("error");
