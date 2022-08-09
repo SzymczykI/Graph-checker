@@ -11,6 +11,7 @@ const App = () => {
   const [paths, setPaths] = useState("");
   const [resultOpen, setResultOpen] = useState(false);
   const [result, setResult] = useState(false);
+  const [connected, setConnected] = useState(true);
 
   useEffect(() => {
     const checkGraph = () => {
@@ -25,12 +26,19 @@ const App = () => {
           howManyNodes,
           pathsArray
         );
+        if (adjList === false) {
+          setConnected(false);
+          setResultOpen(true);
+          setResult(false);
+          return;
+        }
         if (adjList?.length === 0 || paths.length === 0) {
           setResultOpen(false);
           return;
         }
         if (adjList !== undefined) {
           setResult(isBipartite(adjList));
+          setConnected(true);
           setResultOpen(true);
         }
       } catch (error) {
@@ -44,7 +52,9 @@ const App = () => {
     <div className="App">
       <Header />
       <Imput setPaths={setPaths} />
-      {resultOpen && <Result paths={paths} result={result} />}
+      {resultOpen && (
+        <Result paths={paths} connected={connected} result={result} />
+      )}
     </div>
   );
 };

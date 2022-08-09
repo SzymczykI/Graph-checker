@@ -2,7 +2,7 @@ export const recreatePaths = (pathsArr: string[]) => {
   let newArr: Array<number>[] = [];
   pathsArr.forEach((n) => {
     const removedDash = n.split(/[-]/);
-    const lettersToNums = removedDash.map((c) => c.charCodeAt(0) - 97);
+    const lettersToNums = removedDash.map((c) => c.toLowerCase().charCodeAt(0) - 97);
     if (lettersToNums.length === 1) throw new Error("graph is not connected");
     for (let i = 0; i < removedDash.length - 1; i++) {
       newArr.push([lettersToNums[i], lettersToNums[i + 1]]);
